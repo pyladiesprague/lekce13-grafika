@@ -1,9 +1,9 @@
 import pyglet
 from pyglet.window import key
-from lekce13.pong.constants import *
-from lekce13.pong.obdelnik import Obdelnik
-from lekce13.pong.mic import Mic
-from lekce13.pong.palka import Palka
+from constants import *
+from obdelnik import Obdelnik
+from mic import Mic
+from palka import Palka
 
 class Hra:
     def __init__(self, window):
@@ -41,11 +41,13 @@ class Hra:
         ).draw()
 
     def zkontroluj_odrazy(self):
+        # abs() zajistí správný směr bez ohledu na aktuální znaménko rychlosti
         if self.mic.y < VELIKOST_MICE // 2:
             self.mic.rychlost_y = abs(self.mic.rychlost_y)
         if self.mic.y > VYSKA - VELIKOST_MICE // 2:
             self.mic.rychlost_y = -abs(self.mic.rychlost_y)
 
+        # rozsah y-souřadnic středu palky, při kterém míček odrazí
         palka_min = self.mic.y - VELIKOST_MICE / 2 - DELKA_PALKY / 2
         palka_max = self.mic.y + VELIKOST_MICE / 2 + DELKA_PALKY / 2
 

@@ -1,6 +1,6 @@
 import pyglet
-from lekce13.pong.constants import *
-from lekce13.pong.hra import Hra
+from constants import *
+from hra import Hra
 
 window = pyglet.window.Window(width=SIRKA, height=VYSKA)
 hra = Hra(window)

@@ -1,6 +1,6 @@
 import random
-from lekce13.pong.constants import *
-from lekce13.pong.obdelnik import Obdelnik
+from constants import *
+from obdelnik import Obdelnik
 
 class Mic(Obdelnik):
     def __init__(self):
@@ -13,6 +13,7 @@ class Mic(Obdelnik):
     def reset(self):
         self.x = SIRKA // 2
         self.y = VYSKA // 2
+        # náhodný směr: vlevo nebo vpravo
         if random.randint(0, 1):
             self.rychlost_x = RYCHLOST
         else:

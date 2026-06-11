@@ -5,28 +5,27 @@ import os
 os.chdir(os.path.dirname(os.path.abspath(__file__)))
 
 # ------------------------------------------------------------------ #
-# Soubor had.png musí být ve stejné složce jako tento skript.        #
+# Obrazky snake_frame_1.png a snake_frame_2.png jsou ve slozce lekce13#
 # ------------------------------------------------------------------ #
 
-# --- 1. Základní okno ----------------------------------------------- #
-# pyglet.app.run() spustí smyčku událostí — program čeká na události  #
-# a reaguje na ně. Bez ní by se okno okamžitě zavřelo.                #
+# --- 1. Zakladni okno ----------------------------------------------- #
+# pyglet.app.run() spusti smycku udalosti                              #
 
 window = pyglet.window.Window()
 
-# --- 2. Načtení obrázku a sprite ------------------------------------ #
-# Sprite je herní objekt s pozicí, rotací a obrázkem.                 #
-# Okno musí existovat dřív než načteme obrázek — potřebujeme OpenGL. #
+# --- 2. Nacteni obrazku a sprite ------------------------------------ #
+# Sprite je herni objekt s pozici, rotaci a obrazkem.                 #
+# Okno musi existovat driv nez nacteme obrazek — potrebujeme OpenGL.  #
 
 obrazek = pyglet.image.load('../snake_frame_1.png')
 had = pyglet.sprite.Sprite(obrazek, x=50, y=50)
-had.scale_x=0.5
-had.scale_y=0.5
+had.scale_x = 0.5
+had.scale_y = 0.5
 
-# --- 3. Kreslení ---------------------------------------------------- #
-# on_draw se zavolá pokaždé, když Pyglet překreslí okno.              #
-# window.clear() smaže předchozí snímek, jinak by se obrázky          #
-# "vrstvily" přes sebe.                                               #
+# --- 3. Kresleni ---------------------------------------------------- #
+# on_draw se zavola pokazde, kdyz Pyglet prekresluje okno.             #
+# window.clear() smaze predchozi snemek, jinak by se obrazky           #
+# vrstvily pres sebe.                                                  #
 
 def vykresli():
     window.clear()
@@ -35,32 +34,31 @@ def vykresli():
 window.push_handlers(on_draw=vykresli)
 
 # --- 4. Pohyb — funkce tik ------------------------------------------ #
-# schedule_interval volá tik() 30× za sekundu.                        #
-# Parametr dt = čas od posledního zavolání (≈ 0.033 s).              #
-# Fyzikální vzorec: nová pozice = stará pozice + rychlost × čas      #
+# schedule_interval vola tik() 30x za sekundu.                        #
+# Parametr dt = cas od posledniho zavolani (~0.033 s).               #
+# Fyzikalni vzorec: nova pozice = stara pozice + rychlost x cas       #
 
 def tik(dt):
-    had.x = had.x + dt * 100   # pohyb doprava rychlostí 100 px/s
+    had.x = had.x + dt * 100   # pohyb doprava rychlosti 100 px/s
 
 pyglet.clock.schedule_interval(tik, 1/30)
 
-# --- 5. Vlnění ------------------------------------------------------- #
-# Místo přímého pohybu zkusíme vlnový pohyb pomocí sin().             #
-# had.x roste lineárně, had.y se mění jako sinusoida.                 #
-# Odkomentuj a zakomentuj předchozí tik(), aby obě najednou nefungovaly.
+# --- 5. Vlneni ------------------------------------------------------- #
+# Misto primého pohybu zkusime vlnovy pohyb pomoci sin().              #
+# Odkomenuj a zakomenuj predchozi tik().
 
 # def tik(dt):
 #     had.x = had.x + dt * 100
 #     had.y = 150 + 100 * math.sin(had.x / 30)
 
 # --- 6. Rotace ------------------------------------------------------- #
-# had.rotation je úhel ve stupních, roste po každém tiku.             #
-# Zkus přidat do funkce tik():
+# had.rotation je uhel ve stupnich, roste po kazdem tiku.             #
+# Zkus pridat do funkce tik():
 #     had.rotation = had.rotation + 2
 
-# --- 7. Přepínání obrázků ------------------------------------------- #
-# schedule_once zavolá funkci jednou za daný čas (ne opakovaně).      #
-# Řetězením schedule_once vytvoříme animaci přepínání snímků.         #
+# --- 7. Prepinani obrazku ------------------------------------------- #
+# schedule_once zavola funkci jednou za dany cas (ne opakovaně).      #
+# Retezenim schedule_once vytvorime animaci prepinani snimku.         #
 
 obrazek2 = pyglet.image.load('../snake_frame_2.png')
 
@@ -74,9 +72,9 @@ def zmen_zpatky(dt):
 
 pyglet.clock.schedule_once(zmen, 0.2)
 
-# --- 8. Myš ---------------------------------------------------------- #
-# on_mouse_press dostane souřadnice kliknutí a číslo tlačítka.        #
-# Přemístíme hada tam, kam klikneme.                                  #
+# --- 8. Mys ---------------------------------------------------------- #
+# on_mouse_press dostane souradnice kliknuti a cislo tlacitka.        #
+# Premistime hada tam, kam klikneme.                                   #
 
 def klik(x, y, tlacitko, modifikatory):
     had.x = x
