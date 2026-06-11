@@ -8,9 +8,10 @@ class Palka(Obdelnik):
 
     def pohyb(self, dt, nahoru, dolu):
         if nahoru:
-            self.y += RYCHLOST_PALKY * dt
+            self.y += RYCHLOST_PALKY * dt  # vzdálenost = rychlost × čas
         if dolu:
             self.y -= RYCHLOST_PALKY * dt
+        # zarážky: palka nesmí vyjet mimo obrazovku
         if self.y < DELKA_PALKY / 2:
             self.y = DELKA_PALKY / 2
         if self.y > VYSKA - DELKA_PALKY / 2:

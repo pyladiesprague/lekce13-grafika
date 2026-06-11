@@ -13,6 +13,7 @@ class Mic(Obdelnik):
     def reset(self):
         self.x = SIRKA // 2
         self.y = VYSKA // 2
+        # náhodný směr: vlevo nebo vpravo
         if random.randint(0, 1):
             self.rychlost_x = RYCHLOST
         else:
